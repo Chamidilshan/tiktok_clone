@@ -84,6 +84,7 @@ class SignUpScreen extends StatelessWidget {
                     controller:_emailController,
                     labelText: 'Email',
                     icon: Icons.email,
+                    isObscured: true,
                   ),
                 ),
                 SizedBox(
