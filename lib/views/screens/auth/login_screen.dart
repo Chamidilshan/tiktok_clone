@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:tiktok_clone/constants.dart';
+import 'package:tiktok_clone/views/screens/auth/signup_screen.dart';
 import 'package:tiktok_clone/views/widgets/text_input_field.dart';
 
 class LoginScreen extends StatelessWidget {
@@ -98,6 +99,12 @@ class LoginScreen extends StatelessWidget {
                 ),
                 InkWell(
                   onTap: () {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context)=>SignUpScreen()
+                        )
+                    );
                     print('pressed register');
                   },
                   child: Text(
