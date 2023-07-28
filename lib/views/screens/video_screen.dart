@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:tiktok_clone/constants.dart';
 import 'package:tiktok_clone/controllers/video_controller.dart';
 import 'package:tiktok_clone/views/widgets/video_player_item.dart';
 
@@ -10,7 +11,7 @@ class VideoScreen extends StatelessWidget {
 
   buildProfile(String profilePhoto){
     return SizedBox(
-      width: 50.0,
+      width: 60.0,
       height: 60.0,
       child: Stack(
         children: [
@@ -44,7 +45,7 @@ class VideoScreen extends StatelessWidget {
       child: Column(
         children: [
           Container(
-            padding: EdgeInsets.all(10.0),
+            padding: EdgeInsets.all(6.0),
             height: 50.0,
             width: 50.0,
             decoration: BoxDecoration(
@@ -86,7 +87,7 @@ class VideoScreen extends StatelessWidget {
                     Column(
                       children: [
                         SizedBox(
-                          height: 60.0,
+                          height: 100.0,
                         ),
                         Expanded(
                             child: Row(
@@ -101,7 +102,7 @@ class VideoScreen extends StatelessWidget {
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
                                     Text(
-                                      '',//data.userName,
+                                      data.username,
                                       style: TextStyle(
                                         fontSize: 20.0,
                                         color: Colors.white,
@@ -149,8 +150,14 @@ class VideoScreen extends StatelessWidget {
                                       child: Icon(
                                         Icons.favorite,
                                         size: 40.0,
-                                        color: Colors.white,
+                                        color: data.likes.contains(
+                                            authController.user.uid)
+                                            ? Colors.red
+                                            : Colors.white
                                       ),
+                                      onTap: (){
+                                        videoController.likeVideo(data.id);
+                                      }
                                     ),
                                     SizedBox(
                                       height: 8.0,
@@ -206,13 +213,9 @@ class VideoScreen extends StatelessWidget {
                                     ),
                                   ],
                                 ),
-                                  Expanded(
-                                    child: CircleAvatar(
-                                      child : buildMusicAlbum(
-                                        data.profilePhoto
-                                      )
-                                    ),
-                                  )
+                                  buildMusicAlbum(
+                                    data.profilePhoto
+                                  ),
                                 ],
                               ),
                             )
