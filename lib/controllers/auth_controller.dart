@@ -83,7 +83,7 @@ class AuthController extends GetxController{
             uid: cred.user!.uid
         );
 
-        await fireStore.collection('users').doc(cred.user!.uid).set(user.toJson());
+        await firestore.collection('users').doc(cred.user!.uid).set(user.toJson());
       } else{
         Get.snackbar('Error Creating Account', 'Please enter all the fields');
       }

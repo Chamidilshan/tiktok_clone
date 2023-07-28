@@ -1,8 +1,8 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
-class Video{
-  String userName;
+class Video {
+  String username;
   String uid;
   String id;
   List likes;
@@ -11,10 +11,11 @@ class Video{
   String songName;
   String caption;
   String videoUrl;
-  String thumbanil;
+  String thumbnail;
   String profilePhoto;
+
   Video({
-    required this.userName,
+    required this.username,
     required this.uid,
     required this.id,
     required this.likes,
@@ -24,36 +25,38 @@ class Video{
     required this.caption,
     required this.videoUrl,
     required this.profilePhoto,
-    required this.thumbanil,
-});
+    required this.thumbnail,
+  });
+
   Map<String, dynamic> toJson() => {
-    "username" : userName,
-    "uid" : uid,
+    "username": username,
+    "uid": uid,
     "profilePhoto": profilePhoto,
-    "id": uid,
+    "id": id,
     "likes": likes,
     "commentCount": commentCount,
     "shareCount": shareCount,
     "songName": songName,
     "caption": caption,
     "videoUrl": videoUrl,
-    "thumbanil": thumbanil,
+    "thumbnail": thumbnail,
   };
 
-  static Video fromSnap(DocumentSnapshot snap){
+  static Video fromSnap(DocumentSnapshot snap) {
     var snapshot = snap.data() as Map<String, dynamic>;
+
     return Video(
-        profilePhoto: snapshot['profilePhoto'],
-        uid:  snapshot['uid'],
-        userName: snapshot['username'],
-        id: snapshot['id'],
-        likes: snapshot['likes'],
-        commentCount: snapshot['commentCount'],
-        shareCount: snapshot['shareCount'],
-        songName: snapshot['songName'],
-        caption: snapshot['caption'],
-        videoUrl: snapshot['videoUrl'],
-        thumbanil: snapshot['thumbanil']
+      username: snapshot['username'],
+      uid: snapshot['uid'],
+      id: snapshot['id'],
+      likes: snapshot['likes'],
+      commentCount: snapshot['commentCount'],
+      shareCount: snapshot['shareCount'],
+      songName: snapshot['songName'],
+      caption: snapshot['caption'],
+      videoUrl: snapshot['videoUrl'],
+      profilePhoto: snapshot['profilePhoto'],
+      thumbnail: snapshot['thumbnail'],
     );
   }
 }

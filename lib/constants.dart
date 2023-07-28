@@ -13,11 +13,11 @@ const borderColor = Colors.grey;
 
 var firebaseAuth = FirebaseAuth.instance;
 var firebaseStorage = FirebaseStorage.instance;
-var fireStore = FirebaseFirestore.instance;
+var firestore = FirebaseFirestore.instance;
 
 var authController = AuthController.instance;
 
-const pages = [
+List pages = [
   VideoScreen(),
   Text('Search Screen'),
   AddVideoScreen(),
