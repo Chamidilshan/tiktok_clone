@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:tiktok_clone/constants.dart';
 import 'package:tiktok_clone/controllers/video_controller.dart';
+import 'package:tiktok_clone/views/screens/comments_screen.dart';
 import 'package:tiktok_clone/views/widgets/video_player_item.dart';
 
 class VideoScreen extends StatelessWidget {
@@ -179,6 +180,13 @@ class VideoScreen extends StatelessWidget {
                                         size: 40.0,
                                         color: Colors.white,
                                       ),
+                                      onTap: (){
+                                        Navigator.of(context).push(
+                                            MaterialPageRoute(
+                                                builder: (context)=>CommentScreen(id: data.id,)
+                                            )
+                                        );
+                                      },
                                     ),
                                     SizedBox(
                                       height: 8.0,
