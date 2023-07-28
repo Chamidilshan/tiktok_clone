@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:tiktok_clone/constants.dart';
 import 'package:tiktok_clone/controllers/comment_controller.dart';
 import 'package:timeago/timeago.dart' as tago;
 
@@ -83,8 +84,13 @@ class CommentScreen extends StatelessWidget {
                                 child: Icon(
                                   Icons.favorite,
                                   size: 25.0,
-                                  color: Colors.red,
+                                  color: comment.likes.contains(authController.user.uid)
+                                      ?Colors.red
+                                      :Colors.white
                                 ),
+                                onTap: () {
+                                  commentController.likeComment(comment.id);
+                                },
                               ),
                             );
                           }
