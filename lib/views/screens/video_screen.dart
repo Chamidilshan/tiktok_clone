@@ -1,8 +1,11 @@
+import 'dart:js';
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:tiktok_clone/constants.dart';
 import 'package:tiktok_clone/controllers/video_controller.dart';
 import 'package:tiktok_clone/views/screens/comments_screen.dart';
+import 'package:tiktok_clone/views/screens/profile_screen.dart';
 import 'package:tiktok_clone/views/widgets/video_player_item.dart';
 
 class VideoScreen extends StatelessWidget {
@@ -24,11 +27,21 @@ class VideoScreen extends StatelessWidget {
                   color: Colors.white,
                   borderRadius: BorderRadius.circular(25.0)
                 ),
-                child: ClipRRect(
-                  borderRadius: BorderRadius.circular(25.0),
-                  child: Image(
-                    image: NetworkImage(profilePhoto),
-                    fit: BoxFit.cover,
+                child: InkWell(
+                  onTap: (){
+                    // Navigator.push(
+                    //     context,
+                    //     MaterialPageRoute(
+                    //         builder: (context)=>ProfileScreen(uid:  )
+                    //     )
+                    // )
+                  },
+                  child: ClipRRect(
+                    borderRadius: BorderRadius.circular(25.0),
+                    child: Image(
+                      image: NetworkImage(profilePhoto),
+                      fit: BoxFit.cover,
+                    ),
                   ),
                 ),
               ),

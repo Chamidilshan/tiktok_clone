@@ -53,154 +53,173 @@ class _ProfileScreenState extends State<ProfileScreen> {
             ),
           ),
           body: SafeArea(
-            child: Column(
-              children: [
-                Column(
-                  children: [
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        ClipOval(
-                          child: CachedNetworkImage(
-                            imageUrl: controller.user['profilePhoto'],
-                            fit: BoxFit.cover,
-                            height: 100.0,
-                            width: 100.0,
-                            placeholder: (context, url)=>
-                              CircularProgressIndicator(color: Colors.white,),
-                            errorWidget: (context, url, error)=>
-                              Icon(Icons.error)
+            child: SingleChildScrollView(
+              child: Column(
+                children: [
+                  Column(
+                    children: [
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          ClipOval(
+                            child: CachedNetworkImage(
+                              imageUrl: controller.user['profilePhoto'],
+                              fit: BoxFit.cover,
+                              height: 100.0,
+                              width: 100.0,
+                              placeholder: (context, url)=>
+                                CircularProgressIndicator(color: Colors.white,),
+                              errorWidget: (context, url, error)=>
+                                Icon(Icons.error)
+                            ),
+                          )
+                        ],
+                      ),
+                      SizedBox(
+                        height: 50.0,
+                      ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Column(
+                            children: [
+                              Text(
+                                controller.user['following'],
+                                style: TextStyle(
+                                    fontSize: 14.0,
+                                    fontWeight: FontWeight.bold
+                                ),
+                              ),
+                              SizedBox(
+                                height: 6.0,
+                              ),
+                              Text(
+                                'Following',
+                                style: TextStyle(
+                                  fontSize: 14.0,
+                                ),
+                              ),
+                              SizedBox(
+                                height: 6.0,
+                              )
+                            ],
                           ),
-                        )
-                      ],
-                    ),
-                    SizedBox(
-                      height: 50.0,
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Column(
-                          children: [
-                            Text(
-                              controller.user['following'],
-                              style: TextStyle(
+                          Container(
+                            color: Colors.black54,
+                            width: 1.0,
+                            height: 54.0,
+                            margin: EdgeInsets.symmetric(horizontal: 15.0),
+                          ),
+                          Column(
+                            children: [
+                              Text(
+                                controller.user['followers'],
+                                style: TextStyle(
+                                    fontSize: 14.0,
+                                    fontWeight: FontWeight.bold
+                                ),
+                              ),
+                              SizedBox(
+                                height: 6.0,
+                              ),
+                              Text(
+                                'Followers',
+                                style: TextStyle(
                                   fontSize: 14.0,
-                                  fontWeight: FontWeight.bold
+                                ),
                               ),
-                            ),
-                            SizedBox(
-                              height: 6.0,
-                            ),
-                            Text(
-                              'Following',
-                              style: TextStyle(
-                                fontSize: 14.0,
+                              SizedBox(
+                                height: 6.0,
+                              )
+                            ],
+                          ),
+                          Container(
+                            color: Colors.black54,
+                            width: 1.0,
+                            height: 54.0,
+                            margin: EdgeInsets.symmetric(horizontal: 15.0),
+                          ),
+                          Column(
+                            children: [
+                              Text(
+                                controller.user['likes'],
+                                style: TextStyle(
+                                    fontSize: 14.0,
+                                    fontWeight: FontWeight.bold
+                                ),
                               ),
-                            ),
-                            SizedBox(
-                              height: 6.0,
-                            )
-                          ],
-                        ),
-                        Container(
-                          color: Colors.black54,
-                          width: 1.0,
-                          height: 54.0,
-                          margin: EdgeInsets.symmetric(horizontal: 15.0),
-                        ),
-                        Column(
-                          children: [
-                            Text(
-                              controller.user['followers'],
-                              style: TextStyle(
+                              SizedBox(
+                                height: 6.0,
+                              ),
+                              Text(
+                                'Likes',
+                                style: TextStyle(
                                   fontSize: 14.0,
-                                  fontWeight: FontWeight.bold
+                                ),
                               ),
-                            ),
-                            SizedBox(
-                              height: 6.0,
-                            ),
-                            Text(
-                              'Followers',
-                              style: TextStyle(
-                                fontSize: 14.0,
-                              ),
-                            ),
-                            SizedBox(
-                              height: 6.0,
-                            )
-                          ],
-                        ),
-                        Container(
-                          color: Colors.black54,
-                          width: 1.0,
-                          height: 54.0,
-                          margin: EdgeInsets.symmetric(horizontal: 15.0),
-                        ),
-                        Column(
-                          children: [
-                            Text(
-                              controller.user['likes'],
-                              style: TextStyle(
-                                  fontSize: 14.0,
-                                  fontWeight: FontWeight.bold
-                              ),
-                            ),
-                            SizedBox(
-                              height: 6.0,
-                            ),
-                            Text(
-                              'Likes',
-                              style: TextStyle(
-                                fontSize: 14.0,
-                              ),
-                            ),
-                            SizedBox(
-                              height: 6.0,
-                            )
-                          ],
-                        )
-                      ],
-                    ),
-                    SizedBox(
-                      height: 15.0,
-                    ),
-                    Container(
-                      width: 140.0,
-                      height: 47.0,
-                      decoration: BoxDecoration(
-                        border: Border.all(
-                          color: Colors.black12
-                        )
+                              SizedBox(
+                                height: 6.0,
+                              )
+                            ],
+                          )
+                        ],
                       ),
-                      child: Center(
-                        child: InkWell(
-                          onTap: () {
-                            if(widget.uid == authController.user.uid){
-                              authController.signOut();
-                            } else{
-                              controller.followUser();
-                            }
-                          },
-                            child: Text(
-                              widget.uid == authController.user.uid
-                                  ? 'Sign Out'
-                                  : controller.user['isFollowing']
-                                    ? 'Unfollow'
-                                    : 'Follow',
-                              style: TextStyle(
-                                fontSize: 15.0,
-                                fontWeight: FontWeight.bold
-                              ),
-                            )
+                      SizedBox(
+                        height: 15.0,
+                      ),
+                      Container(
+                        width: 140.0,
+                        height: 47.0,
+                        decoration: BoxDecoration(
+                          border: Border.all(
+                            color: Colors.black12
+                          )
+                        ),
+                        child: Center(
+                          child: InkWell(
+                            onTap: () {
+                              if(widget.uid == authController.user.uid){
+                                authController.signOut();
+                              } else{
+                                controller.followUser();
+                              }
+                            },
+                              child: Text(
+                                widget.uid == authController.user.uid
+                                    ? 'Sign Out'
+                                    : controller.user['isFollowing']
+                                      ? 'Unfollow'
+                                      : 'Follow',
+                                style: TextStyle(
+                                  fontSize: 15.0,
+                                  fontWeight: FontWeight.bold
+                                ),
+                              )
+                          ),
                         ),
                       ),
-                    ),
-                    //display video list
-                  ],
-                )
-              ],
+                      //display video list
+                      GridView.builder(
+                        itemCount: controller.user['thumbnails'].length,
+                          physics: NeverScrollableScrollPhysics(),
+                          shrinkWrap: true,
+                          gridDelegate: new SliverGridDelegateWithFixedCrossAxisCount(
+                              crossAxisCount: 2,
+                          childAspectRatio: 1,
+                          crossAxisSpacing: 1,
+                          ),
+                          itemBuilder: (context, index){
+                            String thumbnail = controller.user['thumbnails'][index];
+                            return CachedNetworkImage(
+                                imageUrl: thumbnail,
+                              fit: BoxFit.cover,
+                            );
+                          }
+                      )
+                    ],
+                  )
+                ],
+              ),
             ),
           ),
         );
