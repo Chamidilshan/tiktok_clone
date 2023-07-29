@@ -42,6 +42,7 @@ class LoginScreen extends StatelessWidget {
                 controller:_emailController,
                 labelText: 'Email',
                 icon: Icons.email,
+                isObscured: false,
               ),
             ),
             SizedBox(

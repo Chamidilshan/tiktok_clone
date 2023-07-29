@@ -72,6 +72,7 @@ class SignUpScreen extends StatelessWidget {
                     controller:_userNameController,
                     labelText: 'Username',
                     icon: Icons.person,
+                    isObscured: false,
                   ),
                 ),
                 SizedBox(
@@ -84,7 +85,7 @@ class SignUpScreen extends StatelessWidget {
                     controller:_emailController,
                     labelText: 'Email',
                     icon: Icons.email,
-                    isObscured: true,
+                    isObscured: false,
                   ),
                 ),
                 SizedBox(
@@ -97,6 +98,7 @@ class SignUpScreen extends StatelessWidget {
                     controller:_passwordController,
                     labelText: 'Password',
                     icon: Icons.lock,
+                    isObscured: true,
                   ),
                 ),
                 SizedBox(
