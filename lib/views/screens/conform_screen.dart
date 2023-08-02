@@ -21,9 +21,12 @@ class ConfirmScreen extends StatefulWidget {
 }
 
 class _ConfirmScreenState extends State<ConfirmScreen> {
+
   late VideoPlayerController controller;
   TextEditingController _songController = TextEditingController();
   TextEditingController _captionController = TextEditingController();
+  bool isUploaded = false;
+  bool isPressed = false;
 
   UploadVideoController uploadVideoController = Get.put(UploadVideoController());
 
@@ -48,69 +51,80 @@ class _ConfirmScreenState extends State<ConfirmScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: SingleChildScrollView(
-        child: Column(
-          children: [
-            SizedBox(
-              height: 30.0,
-            ),
-            SizedBox(
-              width: MediaQuery.of(context).size.width,
-              height: MediaQuery.of(context).size.height/1.5,
-              child: VideoPlayer(controller),
-            ),
-            SizedBox(
-              height: 30.0,
-            ),
-            SingleChildScrollView(
-              scrollDirection: Axis.vertical,
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: [
-                    Container(
-                      margin: EdgeInsets.only(left: 10.0, right: 10.0),
-                      width: MediaQuery.of(context).size.width-20,
-                      child: TextInputField(
-                        controller: _songController,
-                        labelText: 'Song Name',
-                        icon: Icons.music_note,
+      body: Visibility(
+        visible: !isPressed,
+        child: SingleChildScrollView(
+          child: Column(
+            children: [
+              SizedBox(
+                height: 30.0,
+              ),
+              SizedBox(
+                width: MediaQuery.of(context).size.width,
+                height: MediaQuery.of(context).size.height/1.5,
+                child: VideoPlayer(controller),
+              ),
+              SizedBox(
+                height: 30.0,
+              ),
+              SingleChildScrollView(
+                scrollDirection: Axis.vertical,
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [
+                      Container(
+                        margin: EdgeInsets.only(left: 10.0, right: 10.0),
+                        width: MediaQuery.of(context).size.width-20,
+                        child: TextInputField(
+                          controller: _songController,
+                          labelText: 'Song Name',
+                          icon: Icons.music_note,
+                        ),
                       ),
-                    ),
-                    SizedBox(
-                      height: 10.0,
-                    ),
-                    Container(
-                      margin: EdgeInsets.only(left: 10.0, right: 10.0),
-                      width: MediaQuery.of(context).size.width-20,
-                      child: TextInputField(
-                        controller: _captionController,
-                        labelText: 'Caption',
-                        icon: Icons.closed_caption,
+                      SizedBox(
+                        height: 10.0,
                       ),
-                    ),
-                    SizedBox(
-                      height: 20.0,
-                    ),
-                    ElevatedButton(
-                        onPressed: () {
-                          uploadVideoController.uploadVideo(
-                              _songController.text,
-                              _captionController.text,
-                            widget.videoPath
-                          );
-                        },
-                        child: Text(
-                          'Share',
-                          style: TextStyle(
-                            fontSize: 20.0,
-                            color: Colors.white
-                          ),
-                        )
-                    )
-                  ],
-                ),
-            )
-          ],
+                      Container(
+                        margin: EdgeInsets.only(left: 10.0, right: 10.0),
+                        width: MediaQuery.of(context).size.width-20,
+                        child: TextInputField(
+                          controller: _captionController,
+                          labelText: 'Caption',
+                          icon: Icons.closed_caption,
+                        ),
+                      ),
+                      SizedBox(
+                        height: 20.0,
+                      ),
+                      ElevatedButton(
+                          onPressed: () {
+                            setState(() {
+                              isPressed = true;
+                            });
+                            uploadVideoController.uploadVideo(
+                                _songController.text,
+                                _captionController.text,
+                              widget.videoPath
+                            );
+                          },
+                          child: Text(
+                            'Share',
+                            style: TextStyle(
+                              fontSize: 20.0,
+                              color: Colors.white
+                            ),
+                          )
+                      )
+                    ],
+                  ),
+              )
+            ],
+          ),
+        ),
+        replacement: Center(
+          child: CircularProgressIndicator(
+            color: Colors.black,
+          ),
         ),
       ),
     );
